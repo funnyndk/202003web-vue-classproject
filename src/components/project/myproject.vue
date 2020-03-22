@@ -1,118 +1,92 @@
+<!-->
+项目使用elememnt-ui的卡片组件
+20200320现在已经能正常显示多个项目卡片
+?还需要添加一个底下的分页栏
+<-->
 <template>
-  <div id="simple">
-    <div class="title">
-      <span>我的项目</span>
-    </div>
-    <el-container>
-      <el-container>
-        <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期"></el-table-column>
-            <el-table-column prop="name" label="姓名"></el-table-column>
-            <el-table-column prop="address" label="地址"></el-table-column>
-          </el-table>
-        </el-main>
-      </el-container>
-    </el-container>
-    <!-- 空白 -->
-    <div class="blank"></div>
-
-    <div class="title">
-      <span>带分页表格</span>
-    </div>
-    <el-table
-      :data="pagingtable.slice((currentPage - 1) * pagesize, currentPage * pagesize)"
-      border
-      style="width: 100%"
-    >
-      <el-table-column prop="order" label="序号"></el-table-column>
-      <el-table-column prop="gid" label="ID"></el-table-column>
-      <el-table-column prop="name" label="产品名称"></el-table-column>
-      <el-table-column prop="price" label="价格"></el-table-column>
-      <el-table-column prop="number" label="数量"></el-table-column>
-      <el-table-column width="120" prop="tag" label="状态">
-        <template slot-scope="scope">
-          <el-tag
-            :type="scope.row.tag =='已取消' ? 'danger':'success' "
-            disable-transitions
-          >{{scope.row.tag}}</el-tag>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage"
-      :page-sizes="[5, 10, 15, 20]"
-      :page-size="pagesize"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="pagingtable.length"
-    ></el-pagination>
-    <!-- total是总数据量 -->
+  <div class="projectpanel">
+    <el-row :gutter="24">
+      <el-col :span="8" v-for="project in projects" :key="project.id" :offset="1">
+        <el-card class="projectcard" :body-style="{ padding: '0px' }" shadow="always">
+          <img
+            src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+            class="image"
+          />
+          <div style="padding: 14px;">
+            <span>{{project.name}}</span>
+            <div class="bottom clearfix">
+              <div class="time">负责人:{{project.manager}}</div>
+              <div class="time">{{project.status}}</div>
+              <el-button type="text" class="button">基本信息</el-button>
+            </div>
+          </div>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
-
-<script>
-export default {
-  data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄"
-    };
-    return {
-      tableData: Array(6).fill(item),
-      pagingtable: [],
-      pagesize: 5, //页面一次展示多少数据
-      currentPage: 1 // 第几页
-    };
-  },
-  methods: {
-    // 每页展示多少条数据
-    handleSizeChange(size) {
-      this.pagesize = size;
-    },
-    // 第几页
-    handleCurrentChange(currentPage) {
-      this.currentPage = currentPage;
-    },
-    // 获取数据
-    getorder() {
-      this.axios
-        .get("/order")
-        .then(res => {
-          this.pagingtable = res.data.data.table;
-        })
-        .catch(err => {
-           ;
-        });
-    }
-  },
-  // 页面渲染前拿到数据
-  mounted() {
-    this.getorder();
-  }
-};
-</script>
-
-
 <style scoped>
-tr,
-th,
-td {
-  color: #303133;
+.projectcard {
+  margin: 15px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+  width:200px;
 }
-.blank {
-  background: rgb(240, 243, 244);
+.projectpanel {
   width: 100%;
-  height: 50px;
+  background: rgb(240, 243, 244);
+  box-shadow: none;
+  font-size: 20px;
+  color: #4d63bc;
+  overflow: hidden;
 }
-div {
-  font-size: 1rem;
-  font-weight: 100;
+.el-row {
+  margin-bottom: 20px;
+}
+.el-col {
+  border-radius: 4px;
+  width: 20%;
+}
+.time {
+  font-size: 13px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
 }
 </style>
 
-
-
+<script>
+export default {
+  name: "projectlist",
+  data() {
+    return {
+      projects:[
+        {
+          id:"20200320",
+          name:"老八蜜汁小汉堡",
+          manager:"ndk",
+          status:"已吃完"
+        },
+        {
+          id:"20200321",
+          name:"老八蜜汁小汉堡",
+          manager:"ccg",
+          status:"吃剩一半"
+        }]
+    }
+  }
+};
+</script>

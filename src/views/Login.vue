@@ -1,26 +1,42 @@
+<!-->
+动态视频背景+半透明登陆框。视频背景用https://coverr.co/
+<-->
 <template>
-  <div id="login">
-    <el-form
-      :model="ruleForm"
-      status-icon
-      :rules="rules"
-      ref="ruleForm"
-      label-width="100px"
-      class="demo-ruleForm"
-    >
-      <h1>vue-admin-app用户登录</h1>
-      <el-form-item label="用户名" prop="username">
-        <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="密码" prop="password">
-        <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button type="primary" @click="sendform('ruleForm')">登录</el-button>
-        <vcode :show="isShow" @onSuccess="onSuccess" @onClose="onClose" />
-      </el-form-item>
-    </el-form>
+  <div class="homepage-hero-module">
+    <div class="video-container">
+      <div :style="fixStyle" class="filter">
+        <div class="loginpanel">
+          <el-form
+            :model="ruleForm"
+            status-icon
+            :rules="rules"
+            ref="ruleForm"
+            label-width="70px"
+            class="demo-ruleForm"
+            hide-required-asterisk="false"
+          >
+            <h1 style="color:white; text-align:center">欢迎来到AchieveIt平台</h1>
+            <el-form-item label="用户名" prop="username">
+              <el-input type="text" v-model="ruleForm.username" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+              <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="info" @click="sendform('ruleForm')">登录</el-button>
+              <vcode :show="isShow" @onSuccess="onSuccess" @onClose="onClose" />
+            </el-form-item>
+          </el-form>
+        </div>
+        <!--内容-->
+      </div>
+      <video :style="fixStyle" autoplay loop muted class="fillWidth" v-on:canplay="canplay">
+        <source src="../assets/video/G1s.mp4" type="video/mp4" />
+      </video>
+      <div class="poster hidden" v-if="!vedioCanPlay">
+        <img :style="fixStyle" src="../assets/video/G1s.jpg" alt />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,6 +68,8 @@ export default {
       }
     };
     return {
+      vedioCanPlay: false,
+      fixStyle: "",
       isShow: false, // 验证码模态框是否出现
       key: 0, //开关
       // 表单
@@ -59,7 +77,6 @@ export default {
         username: "",
         password: ""
       },
-      // 规则
       rules: {
         username: [
           { required: true, validator: validatePass, trigger: "blur" }
@@ -78,9 +95,7 @@ export default {
         .then(res => {
           this.ruleForm = res.data.data.form;
         })
-        .catch(err => {
-           ;
-        });
+        .catch(err => {});
     },
     // 登录发送数据
     sendform() {
@@ -101,9 +116,7 @@ export default {
               this.$store.getters.change;
               this.$router.push("/display");
             })
-            .catch(err => {
-               ;
-            });
+            .catch(err => {});
         }
       }
     },
@@ -119,7 +132,40 @@ export default {
     // 用户点击遮罩层，应该关闭模态框
     onClose() {
       this.isShow = false;
+    },
+    canplay() {
+      this.vedioCanPlay = true;
     }
+  },
+  mounted: function() {
+    //屏幕自适应
+    window.onresize = () => {
+      const windowWidth = document.body.clientWidth;
+      const windowHeight = document.body.clientHeight;
+      const windowAspectRatio = windowHeight / windowWidth;
+      let videoWidth;
+      let videoHeight;
+      if (windowAspectRatio < 0.5625) {
+        videoWidth = windowWidth;
+        videoHeight = videoWidth * 0.5625;
+        this.fixStyle = {
+          height: windowWidth * 0.5625 + "px",
+          width: windowWidth + "px",
+          "margin-bottom": (windowHeight - videoHeight) / 2 + "px",
+          "margin-left": "initial"
+        };
+      } else {
+        videoHeight = windowHeight;
+        videoWidth = videoHeight / 0.5625;
+        this.fixStyle = {
+          height: windowHeight + "px",
+          width: windowHeight / 0.5625 + "px",
+          "margin-left": (windowWidth - videoWidth) / 2 + "px",
+          "margin-bottom": "initial"
+        };
+      }
+    };
+    window.onresize();
   },
   mounted() {
     this.$notify({
@@ -135,33 +181,53 @@ export default {
 </script>
 
 <style scoped>
-#login {
+.homepage-hero-module,
+.video-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-container .poster img {
+  z-index: 0;
+  position: absolute;
+}
+
+.video-container .filter {
+  z-index: 1;
+  position: absolute;
   width: 100%;
   height: 100%;
-  background: url("../assets/pageBg/loginBg.jpg") no-repeat center center;
-  background-size: 100% 100%;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  /*padding: 50px;*/
 }
+
+.loginpanel {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+}
+
+.fillWidth {
+  width: 100%;
+}
+
 .demo-ruleForm {
-  background: #fff;
   border-radius: 20px;
   padding: 50px;
 }
 h1 {
-  margin-left: -50px;
   font-family: Helvetica, ‘Hiragino Sans GB’, ‘Microsoft Yahei’, ‘微软雅黑’,
     Arial, sans-serif;
+  font-size: 50px;
 }
-
 .el-form-item {
   margin: 30px;
-  width: 400px;
-  font-weight: 500;
+  width: 450px;
 }
 button {
   width: 100%;
 }
 </style>
+© 2020 GitHub, Inc.
