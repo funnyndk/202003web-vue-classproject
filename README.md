@@ -1,11 +1,15 @@
-# 202003web-vue-classproject
+# vue-admin-webapp
 
-**仿照别人的demo做的一个课程用的vue项目管理平台**
+**看了掘金一篇文章后，仿照别人的demo自己做的一个vue后台管理系统**
 
-原项目github地址[vue-admin-webapp](https://github.com/yqxshiki/vue-admin-webapp)
 >[掘金原文章地址](https://juejin.im/post/5d69f6676fb9a06b0b1c8cd2)
+
 本项目涉及的技术栈有[vue](https://cn.vuejs.org/)
 [vue-cli](https://cli.vuejs.org/zh/guide/) [vue-Router](https://router.vuejs.org/zh/) [axios](http://www.axios-js.com/)  [Echarts](https://www.echartsjs.com/zh/index.html) [element-ui](http://element-ui.cn/#/zh-CN) [fastmock](https://www.fastmock.site/) [webpack](https://www.webpackjs.com/)
+
+本项目github地址[vue-admin-webapp](https://github.com/yqxshiki/vue-admin-webapp)
+
+[项目运行地址](https://yqxshiki.gitee.io/yqx-vue-admin-webapp)
 
 ### 项目简介
 
@@ -16,7 +20,7 @@ vue-admin-webapp 是一个后台管理系统,基于**vuecli** 和**element-ui**,
 ```git
 # 克隆项目
 
-git clone ~~~~~你懂的~~~~~~
+git clone git@github.com:yqxshiki/vue-admin-webapp.git
 
 # 进入项目目录
 cd vue-admin-webapp
