@@ -1,158 +1,123 @@
+<!-->
+项目使用elememnt-ui的表单组件
+需要项目经理填写的信息有
+1.项目名称
+2.选择客户信息（下拉选项）
+3.预定时间（日期）
+4.交付时间（日期）
+5.项目上级（下拉选项）
+6.主要里程碑？
+7.采用技术？
+8.业务领域？
+9.主要功能？
+<-->
 <template>
-  <div id="complex">
-    <div class="title">
-      <span>复杂操作表格</span>
-      <span class="red">(数据原因,没有做这方面的功能，请见谅!)</span>
-    </div>
-    <!-- search -->
-    <div class="search">
-      <!-- 订单号 -->
-      <div class="searchbox">
-        <el-input v-model="input" placeholder="请输入订单号" :style="{width:'180px',height:'40px'}"></el-input>
-      </div>
-      <!-- 状态 -->
-      <div class="searchbox">
-        <el-select v-model="select">
-          <el-option label="待审核" value="shanghai"></el-option>
-          <el-option label="配送中" value="beijing"></el-option>
-          <el-option label="已完成" value="beijing"></el-option>
-          <el-option label="已取消" value="beijing"></el-option>
+  <div class="projectpanel">
+    <el-form ref="form" :model="new_project" label-width="90px">
+      <el-form-item label="项目名称">
+        <el-input v-model="new_project.name" placeholder="请填写项目名称"></el-input> 
+      </el-form-item>
+      <el-form-item label="客户信息">
+        <el-select v-model="new_project.region" placeholder="请选择客户信息">
+          <!-- 导入已有可选的客户 -->
+          <el-option label="江先生  xx科技有限公司" value="J001"></el-option>
+          <el-option label="李先生  xx生物技术有限公司" value="L001"></el-option>
         </el-select>
-      </div>
-      <!-- 日期 -->
-      <div class="searchbox">
-        <div class="block">
-          <el-date-picker v-model="value1" type="date" placeholder="选择日期"></el-date-picker>
-        </div>
-      </div>
-      <!-- 按钮 -->
-      <div class="searchbox">
-        <el-button type="primary">
-          <i class="el-icon-zoom-in"></i>
-          搜索
-        </el-button>
-      </div>
-      <div class="searchbox">
-        <el-button type="primary">
-          <i class="el-icon-circle-plus-outline"></i>
-          添加
-        </el-button>
-      </div>
-    </div>
-
-    <!-- 表格 -->
-    <div class="table">
-      <el-table ref="filterTable" border :data="tableData" style="width: 100%">
-        <el-table-column prop="order" label="序号"></el-table-column>
-        <el-table-column prop="id" label="订单号"></el-table-column>
-        <el-table-column prop="date" label="下单时间"></el-table-column>
-        <el-table-column prop="address" label="配送地址"></el-table-column>
-        <el-table-column prop="phone" label="联系电话"></el-table-column>
-        <el-table-column prop="people" label="配送员"></el-table-column>
-        <el-table-column prop="tag" label="状态">
-          <template slot-scope="scope">
-            <el-tag
-              :type="scope.row.tag =='已完成' ? 'success':'danger' "
-              disable-transitions
-            >{{scope.row.tag}}</el-tag>
-          </template>
-        </el-table-column>
-
-        <el-table-column prop="status" label="操作" width="335">
-          <el-button type="primary">编辑</el-button>
-          <el-button type="warning" @click="open2">审核</el-button>
-          <el-button type="success" @click="open3">完成</el-button>
-          <el-button type="danger" @click="open4">取消</el-button>
-        </el-table-column>
-      </el-table>
-    </div>
+      </el-form-item>
+      <el-form-item label="预定时间">
+        <el-date-picker
+          type="date"
+          placeholder="选择日期"
+          v-model="new_project.date1"
+          style="width: 50%;"
+        ></el-date-picker>
+      </el-form-item>
+      <el-form-item label="交付时间">
+        <el-date-picker placeholder="选择时间" v-model="new_project.date2" style="width: 50%;"></el-date-picker>
+      </el-form-item>
+      <el-form-item label="项目上级">
+        <el-select v-model="new_project.region" placeholder="请选择客户信息">
+          <!-- 导入已有可选的上级 -->
+          <el-option label="陈晨光" value="worker052"></el-option>
+          <el-option label="倪定凯" value="worker160"></el-option>
+          <el-option label="宋铭辰" value="worker160"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="主要里程碑">
+        <el-input type="textarea" v-model="new_project.desc" placeholder="请填写项目主要里程碑"></el-input>
+      </el-form-item>
+      <el-form-item label="采用技术">
+        <el-checkbox-group v-model="new_project.type">
+          <el-checkbox label="C/C++" name="type"></el-checkbox>
+          <el-checkbox label="Java" name="type"></el-checkbox>
+          <el-checkbox label="python" name="type"></el-checkbox>
+          <el-checkbox label="其他" name="type"></el-checkbox>
+        </el-checkbox-group>
+      </el-form-item>
+      <el-form-item label="业务领域">
+        <el-input type="textarea" v-model="new_project.desc" placeholder="请填写项目业务领域"></el-input>
+      </el-form-item>
+      <el-form-item label="主要功能">
+        <el-input type="textarea" v-model="new_project.desc" placeholder="请填写项目主要功能"></el-input>
+      </el-form-item>
+      <!--
+      <el-form-item label="即时配送">
+        <el-switch v-model="new_project.delivery"></el-switch>
+      </el-form-item>
+      <el-form-item label="特殊资源">
+        <el-radio-group v-model="new_project.resource">
+          <el-radio label="线上品牌商赞助"></el-radio>
+          <el-radio label="线下场地免费"></el-radio>
+        </el-radio-group>
+      </el-form-item>
+      -->
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">立即申请</el-button>
+        <el-button @click="onClear">取消</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
+<style scoped>
+.projectpanel {
+  width: 100%;
+  background: rgb(240, 243, 244);
+  box-shadow: none;
+  font-size: 20px;
+  color: #4d63bc;
+  overflow: hidden;
+  padding: 10px;
+}
+.el-form-item{
+  width: 50%;
+}
+</style>
+
 <script>
 export default {
-  name: "newproject",
+  name: "projectlist",
   data() {
     return {
-      value1: "",
-      input: "",
-      select: "",
-      tableData: [
-        {
-          date: "2016-05-02",
-          people: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          tag: "已完成"
-        },
-        {
-          date: "2016-05-04",
-          people: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          tag: "公司"
-        },
-        {
-          date: "2016-05-01",
-          people: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          tag: "已完成"
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          tag: "公司"
-        }
-      ]
+      new_project: {
+        name: "",
+        client: "",
+        date1: "",
+        date2: "",
+        delivery: false,
+        type: [],
+        resource: "",
+        desc: ""
+      }
     };
   },
   methods: {
-    open2() {
-      this.$notify({
-        title: "成功",
-        message: "审核提交成功",
-        type: "success"
-      });
+    onSubmit() {
+      console.log("submit!");
     },
-    open3() {
-      this.$notify({
-        title: "成功",
-        message: "该订单已配送完毕",
-        type: "success"
-      });
-    },
-    open4() {
-      this.$notify({
-        title: "成功",
-        message: "已取消该订单",
-        type: "success"
-      });
+     onClear() {
+      console.log("clear!");
     }
   }
 };
 </script>
-
-<style scoped>
-#complex {
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-.red {
-  color: red;
-  margin-left: 2rem;
-  font-size: 0.8rem;
-}
-.search {
-  margin-top: 2rem;
-  display: flex;
-  align-items: center;
-}
-.searchbox {
-  padding-left: 2rem;
-}
-
-/* table */
-.table {
-  padding-top: 2rem;
-}
-</style>
