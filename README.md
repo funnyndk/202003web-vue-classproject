@@ -8,7 +8,7 @@
 [vue-cli](https://cli.vuejs.org/zh/guide/) [vue-Router](https://router.vuejs.org/zh/) [axios](http://www.axios-js.com/)  [Echarts](https://www.echartsjs.com/zh/index.html) [element-ui](http://element-ui.cn/#/zh-CN) [fastmock](https://www.fastmock.site/) [webpack](https://www.webpackjs.com/)
 
 ### 项目简介
-https://coverr.co/
+
 202003web-vue-classproject 是课程项目的前端页面,基于**vuecli** 和**element-ui**,使用fastmock来模拟数据,其中有图表,表格,权限,excel等等。
 
 ### 安装
@@ -16,10 +16,10 @@ https://coverr.co/
 ```git
 # 克隆项目
 
-git clone git@github.com:yqxshiki/vue-admin-webapp.git
+git clone git@github.com:funnyndk/202003web-vue-classproject.git
 
 # 进入项目目录
-cd vue-admin-webapp
+cd vue-admin-webapp-master
 
 # 安装依赖
 npm install
@@ -35,6 +35,7 @@ npm run serve
  ![](https://blog-1259178461.cos.ap-chengdu.myqcloud.com/vue-admin-webapp/page.png)
 
 出去登录页,页面主要来三个部分组成：**头部 侧边栏 展示页**,可以点击侧边栏来就行路由跳转
+登陆界面的动态视频来自https://coverr.co/
 
 ### 登录权限验证
 
@@ -89,16 +90,6 @@ axios.interceptors.response.use(res => {
   });
 ```
 
-### Echart多图表
-
-会熟练运用Echart,直线图，饼图，柱状图，动态数据图等等,例如下图
-
-![](https://blog-1259178461.cos.ap-chengdu.myqcloud.com/vue-admin-webapp/echart.png)
-
-### Excel
-
-  excel在实际项目中主要是后端做的，当然前端也可以做,只是我觉得现在没有必要所以没做。想了解的可以去搜索一下就有。
-
 ### fastmock数据
 
 这里引用官方的介绍
@@ -107,5 +98,5 @@ axios.interceptors.response.use(res => {
 >>* 利用mockjs或者canjs的can-fixture实现ajax拦截，本地配置必要的json规则。
 >>* 后端在Controller层造假数据返回给前端。
 ---------------
-**我的fastmock 项目端口**
+**前辈的fastmock 项目端口**
 ![](https://blog-1259178461.cos.ap-chengdu.myqcloud.com/vue-admin-webapp/fastmock.png)
