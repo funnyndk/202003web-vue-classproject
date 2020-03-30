@@ -93,6 +93,7 @@ axios.interceptors.response.use(res => {
 ### fastmock数据
 
 这里引用官方的介绍
+
 >fastmock可以让你在没有后端程序的情况下能真实地在线模拟ajax请求，你可以用fatmock实现项目初期纯前端的效果演示，也可以用fastmock实现开发中的数据模拟从而实现前后端分离。在使用fastmock之前，你的团队实现数据模拟可能是下面的方案中的一种或者多种
 >>* 本地手写数据模拟，在前端代码中产生一大堆的mock代码。
 >>* 利用mockjs或者canjs的can-fixture实现ajax拦截，本地配置必要的json规则。
