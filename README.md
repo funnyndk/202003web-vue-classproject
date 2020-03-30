@@ -1,19 +1,15 @@
-# vue-admin-webapp
+# 202003web-vue-classproject
 
-**看了掘金一篇文章后，仿照别人的demo自己做的一个vue后台管理系统**
-
+**主要参考**
 >[掘金原文章地址](https://juejin.im/post/5d69f6676fb9a06b0b1c8cd2)
+>本项目github地址[vue-admin-webapp](https://github.com/yqxshiki/vue-admin-webapp)
 
 本项目涉及的技术栈有[vue](https://cn.vuejs.org/)
 [vue-cli](https://cli.vuejs.org/zh/guide/) [vue-Router](https://router.vuejs.org/zh/) [axios](http://www.axios-js.com/)  [Echarts](https://www.echartsjs.com/zh/index.html) [element-ui](http://element-ui.cn/#/zh-CN) [fastmock](https://www.fastmock.site/) [webpack](https://www.webpackjs.com/)
 
-本项目github地址[vue-admin-webapp](https://github.com/yqxshiki/vue-admin-webapp)
-
-[项目运行地址](https://yqxshiki.gitee.io/yqx-vue-admin-webapp)
-
 ### 项目简介
-
-vue-admin-webapp 是一个后台管理系统,基于**vuecli** 和**element-ui**,使用fastmock来模拟数据,其中有图表,表格,权限,excel等等，你可以根据你的需求来添加路由。
+https://coverr.co/
+202003web-vue-classproject 是课程项目的前端页面,基于**vuecli** 和**element-ui**,使用fastmock来模拟数据,其中有图表,表格,权限,excel等等。
 
 ### 安装
 
