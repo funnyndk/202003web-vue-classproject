@@ -75,10 +75,10 @@ export default {
     return {
       projects:[
         {
-          id:"20200320",
-          name:"老八蜜汁小汉堡",
-          manager:"ndk",
-          status:"已吃完"
+          id:"20200320",//项目id
+          name:"老八蜜汁小汉堡",//项目名称
+          manager:"ndk",//项目管理员（经理）
+          status:"已吃完"//项目状态
         },
         {
           id:"20200321",

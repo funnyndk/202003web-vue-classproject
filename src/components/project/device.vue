@@ -10,14 +10,17 @@
 <template>
   <div id="setting">
     <div class="button">
-      <el-button type="primary" @click="dialogFormVisible = true">添加权限</el-button>
-      <el-dialog title="添加编辑" :visible.sync="dialogFormVisible">
+      <el-button type="primary" @click="dialogFormVisible = true">添加设备</el-button>
+      <el-dialog title="添加设备" :visible.sync="dialogFormVisible">
         <el-form :model="form">
-          <el-form-item label="身份" :label-width="formLabelWidth">
-            <el-input v-model="form.status" autocomplete="off" placeholder="请输入要他添加的身份类别"></el-input>
+          <el-form-item label="设备名" :label-width="formLabelWidth">
+            <el-input v-model="form.deviceName" autocomplete="off" placeholder="请输入设备名称"></el-input>
           </el-form-item>
-          <el-form-item label="说明" :label-width="formLabelWidth">
-            <el-input v-model="form.show" autocomplete="off" placeholder="请输入相关说明"></el-input>
+          <el-form-item label="设备现持有人" :label-width="formLabelWidth">
+            <el-input v-model="form.deviceNow" autocomplete="off" placeholder="请输入设备现持有人"></el-input>
+          </el-form-item>
+          <el-form-item label="设备状态" :label-width="formLabelWidth">
+            <el-input v-model="form.status" autocomplete="off" placeholder="请输入设备状态"></el-input>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
@@ -30,18 +33,21 @@
     <!-- 展示数据 -->
     <div class="wrap">
       <el-table :data="settingdata" border style="width: 100%">
-        <el-table-column prop="status" label="身份"></el-table-column>
-        <el-table-column prop="show" label="说明"></el-table-column>
+        <el-table-column prop="deviceID" label="设备ID"></el-table-column>
+        <el-table-column prop="deviceName" label="设备名"></el-table-column>
+        <el-table-column prop="deviceNow" label="设备现持有人"></el-table-column>
+        <el-table-column prop="status" label="设备状况"></el-table-column>
+        <el-table-column prop="deviceLastCheck" label="最后更新于"></el-table-column>
         <el-table-column prop="address" label="操作">
           <template slot-scope="scope">
-            <el-button type="primary" @click="dialogFormVisible1 = true;">编辑</el-button>
-            <el-dialog title="权限编辑" :visible.sync="dialogFormVisible1">
+            <el-button type="primary" @click="dialogFormVisible1 = true;">更新</el-button>
+            <el-dialog title="更新设备信息" :visible.sync="dialogFormVisible1">
               <el-form :model="form1">
-                <el-form-item label="身份" :label-width="formLabelWidth">
-                  <el-input v-model="form1.status1" autocomplete="off" placeholder="请输入要他添加的身份类别"></el-input>
+                <el-form-item label="设备现持有人" :label-width="formLabelWidth">
+                  <el-input v-model="form1.deviceNow" autocomplete="off" placeholder="请输入设备现持有人"></el-input>
                 </el-form-item>
-                <el-form-item label="说明" :label-width="formLabelWidth">
-                  <el-input v-model="form1.show1" autocomplete="off" placeholder="请输入相关说明"></el-input>
+                <el-form-item label="设备状态" :label-width="formLabelWidth">
+                  <el-input v-model="form1.status" autocomplete="off" placeholder="请输入设备状态"></el-input>
                 </el-form-item>
               </el-form>
               <div slot="footer" class="dialog-footer">
@@ -62,16 +68,29 @@ export default {
   name: "setting",
   data() {
     return {
-      settingdata: [],
+      settingdata: [
+        {
+        deviceID: "123",//设备id
+        deviceName: "iponeX",//设备名
+        deviceNow:"5楼会议室",//设备现持有人
+        status:"正常",//设备状况
+        deviceLastCheck:"2020-03-30"//最后更新于
+        }
+      ],
       dialogFormVisible: false,
       dialogFormVisible1: false,
       form: {
-        status: "",
-        show: ""
+        deviceName: "",
+        deviceNow:"",
+        status:"",
+        deviceLastCheck:""
       },
       form1: {
-        status1: "",
-        show1: ""
+        deviceID: "",
+        deviceName: "",
+        deviceNow:"",
+        status:"",
+        deviceLastCheck:""
       },
       formLabelWidth: "120px"
     };
@@ -79,7 +98,7 @@ export default {
   methods: {
     // 删除
     handleDelete(index, row) {
-      this.$confirm("此操作将永久删除该文件, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该设备, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
@@ -102,7 +121,7 @@ export default {
       this.axios
         .get("/setting")
         .then(res => {
-          this.settingdata = res.data.data.setting;
+          //this.settingdata = res.data.data.setting;
         })
         .catch(err => {
            ;
