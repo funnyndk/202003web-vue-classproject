@@ -138,5 +138,6 @@ button {
 
 .wrap {
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 </style>

@@ -43,16 +43,17 @@ const router = new Router({
         //project
         { path: "/newproject", meta: { title: '申请立项' }, component: () => import('./components/project/newproject.vue') },
         { path: "/myproject", meta: { title: '我的项目' }, component: () => import('./components/project/myproject.vue') },
+        { path: "/projectdetail", meta: { title: '项目详情' }, component: () => import('./components/project/device.vue')},
+        { path: "/risk", meta: { title: '风险管理' }, component: () => import('./components/project/risk.vue')},
         { path: "/worktime", meta: { title: '工时信息' }, component: () => import('./components/project/worktime.vue') },
         { path: "/device", meta: { title: '设备管理' }, component: () => import('./components/project/device.vue') },
+        { path: "/worktimeapprove", meta: { title: '工时信息审批' }, component: () => import('./components/project/worktimeapprove.vue') },
+        { path: "/newprojectapprove", meta: { title: '立项审批' }, component: () => import('./components/project/newprojectapprove.vue') },
       ]
     },
     { path: "/header", component: () => import('./components/Header.vue') },
     { path: "/error", component: () => import('./views/Error.vue') },
-    {
-      path: "/sidebar", component: () => import('./components/Sidebar.vue')
-    },
-
+    {  path: "/sidebar", component: () => import('./components/Sidebar.vue')},
     { path: "*", redirect: "/error", hidden: true }
   ]
 })
