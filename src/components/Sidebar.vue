@@ -43,12 +43,7 @@
             <template slot="title">
               <i class="el-icon-s-data"></i>设备管理
             </template>
-          </el-menu-item>
-          <el-menu-item index="/risk">
-            <template slot="title">
-              <i class="el-icon-s-data"></i>风险管理
-            </template>
-          </el-menu-item>
+          </el-menu-item>          
           <!--router 最好不要有下划线，实测有bug -->
           <el-menu-item index="/newprojectapprove">
             <template slot="title">
@@ -61,6 +56,11 @@
             </template>
           </el-menu-item>
          <!--
+          <el-menu-item index="/risk">
+            <template slot="title">
+              <i class="el-icon-s-data"></i>风险管理
+            </template>
+          </el-menu-item>
             <el-submenu index="/driver">
               <template slot="title">
                 <i class="el-icon-s-flag"></i>引导指南

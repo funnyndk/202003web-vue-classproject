@@ -3,7 +3,7 @@
 需要工时信息填写的有
 1.所属项目
 2.选择功能
-3.选择活动
+3.选择活动  (2，3项需要改成多选)
 4.填写时间
 <-->
 <template>
@@ -25,7 +25,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="工作活动">
-        <el-cascader :options="workoptions" clearable></el-cascader>
+        <el-cascader :options="workoptions" :props="props" clearable></el-cascader>
       </el-form-item>
       <el-form-item label="开始时间">
         <el-date-picker
@@ -79,6 +79,7 @@
 export default {
   data(){
     return {
+      props: { multiple: true },
       workoptions:
       [   {
           value:'gongchenghuodong',

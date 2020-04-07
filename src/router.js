@@ -43,8 +43,7 @@ const router = new Router({
         //project
         { path: "/newproject", meta: { title: '申请立项' }, component: () => import('./components/project/newproject.vue') },
         { path: "/myproject", meta: { title: '我的项目' }, component: () => import('./components/project/myproject.vue') },
-        { path: "/projectdetail", meta: { title: '项目详情' }, component: () => import('./components/project/device.vue')},
-        { path: "/risk", meta: { title: '风险管理' }, component: () => import('./components/project/risk.vue')},
+        { path: "/projectdetail", meta: { title: '项目详情' }, component: () => import('./components/project/projectdetail.vue')},
         { path: "/worktime", meta: { title: '工时信息' }, component: () => import('./components/project/worktime.vue') },
         { path: "/device", meta: { title: '设备管理' }, component: () => import('./components/project/device.vue') },
         { path: "/worktimeapprove", meta: { title: '工时信息审批' }, component: () => import('./components/project/worktimeapprove.vue') },
@@ -53,7 +52,14 @@ const router = new Router({
     },
     { path: "/header", component: () => import('./components/Header.vue') },
     { path: "/error", component: () => import('./views/Error.vue') },
-    {  path: "/sidebar", component: () => import('./components/Sidebar.vue')},
+    { path: "/sidebar", component: () => import('./components/Sidebar.vue') },
+
+    { path: "/info", component: () => import('./components/project/projectdetail/info.vue') },
+    { path: "/risk", component: () => import('./components/project/projectdetail/risk.vue') },
+    { path: "/authority", component: () => import('./components/project/projectdetail/authority.vue') },
+    { path: "/func", component: () => import('./components/project/projectdetail/func.vue') },
+    { path: "/person", component: () => import('./components/project/projectdetail/person.vue') },
+
     { path: "*", redirect: "/error", hidden: true }
   ]
 })
